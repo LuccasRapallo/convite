@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Convite po</title>
+  <title>Convite Persona</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -110,6 +110,23 @@
       z-index: 10;
     }
 
+    .dialogue-top {
+      position: fixed;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #1b3b6f;
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 14px;
+      width: 90%;
+      max-width: 300px;
+      display: none;
+      text-align: center;
+      z-index: 10;
+    }
+
     audio {
       display: none;
     }
@@ -133,12 +150,17 @@
     Você quer sim, aceita logo...
   </div>
 
+  <div class="dialogue-top" id="dialogueTop">
+    Não é pra tanto também né
+  </div>
+
   <audio id="move-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_27a319b82b.mp3?filename=select-1-105477.mp3"></audio>
 
   <script>
     const buttonNo = document.getElementById('no');
     const sound = document.getElementById('move-sound');
     const dialogue = document.getElementById('dialogue');
+    const dialogueTop = document.getElementById('dialogueTop');
     let attempts = 0;
     const margin = 100;
 
@@ -174,6 +196,9 @@
       attempts++;
       if (attempts >= 5) {
         dialogue.style.display = 'block';
+      }
+      if (attempts >= 10) {
+        dialogueTop.style.display = 'block';
       }
     }
 
