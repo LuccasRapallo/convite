@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Convite Persona</title>
+  <title>Convite po</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-    /* Reset básico */
     * {
       margin: 0;
       padding: 0;
@@ -18,14 +17,12 @@
       font-family: 'Orbitron', sans-serif;
       overflow: hidden;
       color: white;
-      /* Fundo gradiente azul inspirado em Persona 3 */
       background: linear-gradient(135deg, #88c3f0, #274c78);
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    /* HUD no canto superior direito */
     .hud {
       position: absolute;
       top: 10px;
@@ -40,7 +37,6 @@
       font-size: 24px;
     }
 
-    /* Caixa central do pedido */
     .box {
       font-size: 18px;
       text-align: center;
@@ -74,7 +70,6 @@
       text-shadow: 1px 1px #000;
     }
 
-    /* Botão Sim com efeito de hover invertendo cores */
     #yes {
       background-color: white;
       color: #1b3b6f;
@@ -101,19 +96,21 @@
       line-height: 40px;
     }
 
-    /* Caixa de diálogo após muitas tentativas */
     .dialogue {
-      position: absolute;
-      bottom: 15px;
+      position: fixed;
+      bottom: 90px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(0,0,0,0.4); /* um pouco transparente */
+      background: rgba(0, 0, 0, 0.6);
       border: 2px solid #1b3b6f;
       border-radius: 10px;
       padding: 1rem;
-      font-size: 16px;
+      font-size: 14px;
+      width: 90%;
+      max-width: 300px;
       display: none;
       text-align: center;
+      z-index: 10;
     }
 
     audio {
@@ -122,13 +119,11 @@
   </style>
 </head>
 <body>
-  <!-- HUD com data e lua -->
   <div class="hud" id="hud">
     <div id="datetime">--:--</div>
     <div class="moon">🌙</div>
   </div>
 
-  <!-- Caixa principal -->
   <div class="box">
     <p>C*zinho hoje?</p>
     <div class="buttons-container">
@@ -137,12 +132,10 @@
     </div>
   </div>
 
-  <!-- Caixa de diálogo -->
   <div class="dialogue" id="dialogue">
     Você quer sim, aceita logo...
   </div>
 
-  <!-- Efeito sonoro -->
   <audio id="move-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_27a319b82b.mp3?filename=select-1-105477.mp3"></audio>
 
   <script>
@@ -150,16 +143,17 @@
     const sound = document.getElementById('move-sound');
     const dialogue = document.getElementById('dialogue');
     let attempts = 0;
+    const margin = 100;
 
     buttonNo.addEventListener('touchstart', moveButton);
     buttonNo.addEventListener('mouseenter', moveButton);
 
     function moveButton() {
-      const maxX = window.innerWidth - buttonNo.offsetWidth;
-      const maxY = window.innerHeight - buttonNo.offsetHeight;
+      const maxX = window.innerWidth - buttonNo.offsetWidth - margin;
+      const maxY = window.innerHeight - buttonNo.offsetHeight - margin;
 
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
+      const randomX = Math.floor(Math.random() * maxX + margin / 2);
+      const randomY = Math.floor(Math.random() * maxY + margin / 2);
 
       buttonNo.style.position = 'absolute';
       buttonNo.style.left = `${randomX}px`;
