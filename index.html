@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Convite po</title>
+  <title>Convite Persona</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -90,10 +90,7 @@
     a {
       text-decoration: none;
       color: inherit;
-      display: block;
-      width: 100%;
-      height: 100%;
-      line-height: 40px;
+      display: inline;
     }
 
     .dialogue {
@@ -127,7 +124,7 @@
   <div class="box">
     <p>C*zinho hoje?</p>
     <div class="buttons-container">
-      <a href="https://wa.me/5531987249650?text=Hj%20tem%20%F0%9F%98%88">Sim</a>
+      <button id="yes"><a href="https://wa.me/5531987249650?text=Hj%20tem%20%F0%9F%98%88">Sim</a></button>
       <button id="no">Não</button>
     </div>
   </div>
@@ -145,8 +142,20 @@
     let attempts = 0;
     const margin = 100;
 
-    buttonNo.addEventListener('touchstart', moveButton);
-    buttonNo.addEventListener('mouseenter', moveButton);
+    buttonNo.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    buttonNo.addEventListener('touchstart', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      moveButton();
+    });
+
+    buttonNo.addEventListener('mouseenter', (event) => {
+      moveButton();
+    });
 
     function moveButton() {
       const maxX = window.innerWidth - buttonNo.offsetWidth - margin;
